@@ -1,4 +1,4 @@
-﻿namespace OfficeEquipment_
+namespace OfficeEquipment_
 {
     partial class Form1
     {
@@ -43,6 +43,7 @@
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.Size = new System.Drawing.Size(620, 159);
             this.txtOutput.TabIndex = 0;
+            this.txtOutput.TextChanged += new System.EventHandler(this.txtOutput_TextChanged);
             // 
             // btnAddEquipment
             // 
@@ -107,8 +108,10 @@
             this.Controls.Add(this.txtOutput);
             this.Name = "Form1";
             this.Text = "Офисное оборудование";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
