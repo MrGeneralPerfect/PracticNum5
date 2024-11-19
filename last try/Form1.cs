@@ -1,6 +1,7 @@
-﻿using OfficeEquipment;
+using OfficeEquipment;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace OfficeEquipment_
@@ -213,7 +214,6 @@ namespace OfficeEquipment_
             {
                 foreach (var device in devices)
                 {
-                    device.Print(); // Вывод информации о каждом устройстве
                     txtOutput.AppendText(device.ToString() + Environment.NewLine);
                 }
             }
@@ -226,6 +226,16 @@ namespace OfficeEquipment_
         private void btnExit_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOutput_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
