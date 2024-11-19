@@ -1,4 +1,4 @@
-﻿using OfficeEquipment_;
+using OfficeEquipment_;
 using System;
 using System.Windows.Forms;
 
