@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace OfficeEquipment
 {
@@ -40,6 +40,12 @@ namespace OfficeEquipment
         {
             Console.WriteLine($"\nМодель: {Model}\nЦена: {Price} рублей\nСкорость сканирования: {ScanSpeed} страниц в минуту");
         }
+
+        // Переопределение метода ToString для вывода информации
+        public override string ToString()
+        {
+            return $"Модель: {Model}, Цена: {Price} рублей, Скорость сканирования: {ScanSpeed} страниц в минуту";
+        }
     }
 
     // Класс для принтера, наследующий от OfficeEquip
@@ -66,6 +72,12 @@ namespace OfficeEquipment
             base.Print(); // Вызов метода базового класса
             Console.WriteLine($"Ёмкость картриджа: {Storage} страниц");
         }
+
+        // Переопределение метода ToString для вывода информации о принтере
+        public override string ToString()
+        {
+            return base.ToString() + $", Ёмкость картриджа: {Storage} страниц";
+        }
     }
 
     // Класс для факса, наследующий от OfficeEquip
@@ -91,6 +103,12 @@ namespace OfficeEquipment
         {
             base.Print(); // Вызов метода базового класса
             Console.WriteLine($"Количество телефонных линий: {PhoneLines}");
+        }
+
+        // Переопределение метода ToString для вывода информации о факсе
+        public override string ToString()
+        {
+            return base.ToString() + $", Количество телефонных линий: {PhoneLines}";
         }
     }
 }
