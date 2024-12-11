@@ -15,7 +15,7 @@ namespace OfficeEquipment_
             InitializeComponent();
         }
 
-        private int GetValidInt(string input, int min, int max)
+        private int? GetValidInt(string input, int min, int max)
         {
             if (int.TryParse(input, out int value) && value >= min && value <= max)
             {
@@ -23,8 +23,8 @@ namespace OfficeEquipment_
             }
             else
             {
-                MessageBox.Show("Неверный ввод. Попробуйте еще раз.");
-                return 0; // Возвращаем 0 или любое другое значение по умолчанию
+                MessageBox.Show($"Неверный ввод. Значение должно быть между {min} и {max}.");
+                return null; // Возвращаем null для обозначения ошибки
             }
         }
 
@@ -70,14 +70,29 @@ namespace OfficeEquipment_
 
             if (inputForm.ShowDialog() == DialogResult.OK)
             {
-                var officeEquip = new OfficeEquip
+                string model = txtModel.Text.Trim();
+
+                // Проверка на пустую строку и заглавную букву
+                if (string.IsNullOrEmpty(model) || !char.IsUpper(model[0]))
                 {
-                    Model = txtModel.Text,
-                    Price = GetValidInt(txtPrice.Text, 1, 100000),
-                    ScanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200)
-                };
-                devices.Add(officeEquip);
-                MessageBox.Show("Офисное оборудование добавлено.");
+                    MessageBox.Show("Название модели не может быть пустым и должно начинаться с заглавной буквы.");
+                    return; // Прекращаем выполнение метода
+                }
+
+                var price = GetValidInt(txtPrice.Text, 1, 100000);
+                var scanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200);
+
+                if (price.HasValue && scanSpeed.HasValue) // Проверка на null
+                {
+                    var officeEquip = new OfficeEquip
+                    {
+                        Model = model,
+                        Price = price.Value,
+                        ScanSpeed = scanSpeed.Value
+                    };
+                    devices.Add(officeEquip);
+                    MessageBox.Show("Офисное оборудование добавлено.");
+                }
             }
         }
 
@@ -132,15 +147,31 @@ namespace OfficeEquipment_
 
             if (inputForm.ShowDialog() == DialogResult.OK)
             {
-                var printer = new Printer
+                string model = txtModel.Text.Trim();
+
+                // Проверка на пустую строку и заглавную букву
+                if (string.IsNullOrEmpty(model) || !char.IsUpper(model[0]))
                 {
-                    Model = txtModel.Text,
-                    Storage = GetValidInt(txtStorage.Text, 500, 15000),
-                    Price = GetValidInt(txtPrice.Text, 1, 100000),
-                    ScanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200)
-                };
-                devices.Add(printer);
-                MessageBox.Show("Принтер добавлен.");
+                    MessageBox.Show("Название модели не может быть пустым и должно начинаться с заглавной буквы.");
+                    return; // Прекращаем выполнение метода
+                }
+
+                var storage = GetValidInt(txtStorage.Text, 500, 15000);
+                var price = GetValidInt(txtPrice.Text, 1, 100000);
+                var scanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200);
+
+                if (storage.HasValue && price.HasValue && scanSpeed.HasValue) // Проверка на null
+                {
+                    var printer = new Printer
+                    {
+                        Model = model,
+                        Storage = storage.Value,
+                        Price = price.Value,
+                        ScanSpeed = scanSpeed.Value
+                    };
+                    devices.Add(printer);
+                    MessageBox.Show("Принтер добавлен.");
+                }
             }
         }
 
@@ -195,15 +226,31 @@ namespace OfficeEquipment_
 
             if (inputForm.ShowDialog() == DialogResult.OK)
             {
-                var fax = new Fax
+                string model = txtModel.Text.Trim();
+
+                // Проверка на пустую строку и заглавную букву
+                if (string.IsNullOrEmpty(model) || !char.IsUpper(model[0]))
                 {
-                    Model = txtModel.Text,
-                    PhoneLines = GetValidInt(txtPhoneLines.Text, 1, 50),
-                    Price = GetValidInt(txtPrice.Text, 1, 100000),
-                    ScanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200)
-                };
-                devices.Add(fax);
-                MessageBox.Show("Факс добавлен.");
+                    MessageBox.Show("Название модели не может быть пустым и должно начинаться с заглавной буквы.");
+                    return; // Прекращаем выполнение метода
+                }
+
+                var phoneLines = GetValidInt(txtPhoneLines.Text, 1, 50);
+                var price = GetValidInt(txtPrice.Text, 1, 100000);
+                var scanSpeed = GetValidInt(txtScanSpeed.Text, 1, 200);
+
+                if (phoneLines.HasValue && price.HasValue && scanSpeed.HasValue) // Проверка на null
+                {
+                    var fax = new Fax
+                    {
+                        Model = model,
+                        PhoneLines = phoneLines.Value,
+                        Price = price.Value,
+                        ScanSpeed = scanSpeed.Value
+                    };
+                    devices.Add(fax);
+                    MessageBox.Show("Факс добавлен.");
+                }
             }
         }
 
